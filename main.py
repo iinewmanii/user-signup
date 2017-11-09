@@ -30,11 +30,13 @@ def completion_check():
 
         elif password == '':
             password_error = 'That is not a valid password'
-            return render_template('signup_form.html', username=username, password_error=password_error, email=email)
+            return render_template('signup_form.html', username=username,
+                                   password_error=password_error, email=email)
 
         elif verify == '':
             verify_error = 'Please verify password'
-            return render_template('signup_form.html', username=username, verify_error=verify_error, email=email)
+            return render_template('signup_form.html', username=username,
+                                   verify_error=verify_error, email=email)
 
     else:
         return username_password_check(username, password, verify, email)
@@ -64,15 +66,18 @@ def username_password_check(username, password, verify, email):
 
     elif ' ' in password:
         password_error = 'That is not a valid password (Space not allowed)'
-        return render_template('signup_form.html', username=username, password_error=password_error, email=email)
+        return render_template('signup_form.html', username=username,
+                               password_error=password_error, email=email)
 
     elif password_length < min_length:
         password_error = 'That is not a valid password (Must be at least 3 characters)'
-        return render_template('signup_form.html', username=username, password_error=password_error, email=email)
+        return render_template('signup_form.html', username=username,
+                               password_error=password_error, email=email)
 
     elif password_length > max_length:
         password_error = 'That is not a valid password (Cannot be more than 20 characters)'
-        return render_template('signup_form.html', username=username, password_error=password_error, email=email)
+        return render_template('signup_form.html', username=username,
+                               password_error=password_error, email=email)
 
     else:
         return password_verify_check(username, password, verify, email)
@@ -81,13 +86,14 @@ def username_password_check(username, password, verify, email):
 def password_verify_check(username, password, verify, email):
     if password != verify:
         verify_error = 'Passwords do not match'
-        return render_template('signup_form.html', username=username, verify_error=verify_error, email=email)
+        return render_template('signup_form.html', username=username,
+                               verify_error=verify_error, email=email)
 
     else:
-        return email_check(username, password, verify, email)
+        return email_check(username, email)
 
 @APP.route('/email_check', methods=['POST'])
-def email_check(username, password, verify, email):
+def email_check(username, email):
     email_length = len(email)
 
     email_error = ''
