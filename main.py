@@ -98,25 +98,29 @@ def email_check(username, email):
 
     email_error = ''
 
-    if ' ' in email:
-        email_error = 'That is not a valid email address (Space not allowed)'
-        return render_template('signup_form.html', username=username, email_error=email_error)
+    if email != '':
+        if ' ' in email:
+            email_error = 'That is not a valid email address (Space not allowed)'
+            return render_template('signup_form.html', username=username, email_error=email_error)
 
-    elif '@' not in email:
-        email_error = 'That is not a valid email address (Missing @ character)'
-        return render_template('signup_form.html', username=username, email_error=email_error)
+        elif '@' not in email:
+            email_error = 'That is not a valid email address (Missing @ character)'
+            return render_template('signup_form.html', username=username, email_error=email_error)
 
-    elif '.' not in email:
-        email_error = 'That is not a valid email address (Missing . character)'
-        return render_template('signup_form.html', username=username, email_error=email_error)
+        elif '.' not in email:
+            email_error = 'That is not a valid email address (Missing . character)'
+            return render_template('signup_form.html', username=username, email_error=email_error)
 
-    elif email_length < 3:
-        email_error = 'That is not a valid email address (Address cannot be less than 3 characters)'
-        return render_template('signup_form.html', username=username, email_error=email_error)
+        elif email_length < 3:
+            email_error = 'That is not a valid email address (Address cannot be less than 3 characters)'
+            return render_template('signup_form.html', username=username, email_error=email_error)
 
-    elif email_length > 20:
-        email_error = 'That is not a valid email address (Address cannot be more than 20 characters)'
-        return render_template('signup_form.html', username=username, email_error=email_error)
+        elif email_length > 20:
+            email_error = 'That is not a valid email address (Address cannot be more than 20 characters)'
+            return render_template('signup_form.html', username=username, email_error=email_error)
+
+        else:
+            return welcome(username)
 
     else:
         return welcome(username)
